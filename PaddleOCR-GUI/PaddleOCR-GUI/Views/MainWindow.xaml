@@ -1,0 +1,87 @@
+﻿<Window x:Class="PaddleOCR_GUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"     
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:local="clr-namespace:PaddleOCR_GUI"
+        mc:Ignorable="d"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="600" Width="1000">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="TreeViewItem">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid  Grid.Column="0" Background="LightBlue">
+            <StackPanel Orientation="Vertical" Margin="5" >
+                <TreeView AllowDrop="True" ScrollViewer.CanContentScroll="False">
+                    <TreeViewItem>
+                        <TreeViewItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="CalendarSearch16" Margin="5"/>
+                                <TextBlock Text="PaddleOCR"/>
+                            </StackPanel>
+                        </TreeViewItem.Header>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="ScanText16" Margin="5"/>
+                                    <TextBlock Text="Process"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <prism:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="Process_Method" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Settings20" Margin="5"/>
+                                    <TextBlock Text="Python.NET"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <prism:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="Python_NET_Method" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TreeViewItem>
+                        <TreeViewItem>
+                            <TreeViewItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <ui:SymbolIcon Symbol="Settings20" Margin="5"/>
+                                    <TextBlock Text="PaddleOCR Settings"/>
+                                </StackPanel>
+                            </TreeViewItem.Header>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <prism:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="PaddleOCRSettings" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="5"  />
+        </Grid>
+    </Grid>
+</Window>
